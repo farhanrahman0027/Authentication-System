@@ -11,6 +11,7 @@ const Register: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const { register, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -61,16 +62,16 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="auth-container min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center bg-cyan-600 p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
-          <button className="btn-primary mb-4">SIGN UP</button>
+          <button className="bg-cyan-400 text-white py-3 px-8 rounded font-semibold">SIGN UP</button>
         </div>
         
-        <div className="auth-card rounded-lg shadow-card p-8 animate-fade-in">
+        <div className="rounded-lg bg-navy-900 shadow-lg p-8 animate-fade-in">
           <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 rounded-full bg-slate-600 flex items-center justify-center">
-              <User className="text-slate-400" size={48} />
+            <div className="w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center border-2 border-gray-600">
+              <User className="text-gray-400" size={48} />
             </div>
           </div>
           
@@ -84,12 +85,12 @@ const Register: React.FC = () => {
             <div className="mb-4">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User size={20} className="text-slate-400" />
+                  <User size={20} className="text-gray-400" />
                 </div>
                 <input
                   type="text"
                   placeholder="Full Name"
-                  className="form-input pl-10"
+                  className="w-full py-3 px-4 pl-10 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -99,12 +100,12 @@ const Register: React.FC = () => {
             <div className="mb-4">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail size={20} className="text-slate-400" />
+                  <Mail size={20} className="text-gray-400" />
                 </div>
                 <input
                   type="email"
                   placeholder="Email"
-                  className="form-input pl-10"
+                  className="w-full py-3 px-4 pl-10 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -114,11 +115,11 @@ const Register: React.FC = () => {
             <div className="mb-4">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Calendar size={20} className="text-slate-400" />
+                  <Calendar size={20} className="text-gray-400" />
                 </div>
                 <input
                   type="date"
-                  className="form-input pl-10"
+                  className="w-full py-3 px-4 pl-10 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   value={dateOfBirth}
                   onChange={(e) => setDateOfBirth(e.target.value)}
                 />
@@ -128,12 +129,12 @@ const Register: React.FC = () => {
             <div className="mb-4">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <KeyRound size={20} className="text-slate-400" />
+                  <KeyRound size={20} className="text-gray-400" />
                 </div>
                 <input
                   type="password"
                   placeholder="Password"
-                  className="form-input pl-10"
+                  className="w-full py-3 px-4 pl-10 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -143,12 +144,12 @@ const Register: React.FC = () => {
             <div className="mb-6">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <KeyRound size={20} className="text-slate-400" />
+                  <KeyRound size={20} className="text-gray-400" />
                 </div>
                 <input
                   type="password"
                   placeholder="Confirm Password"
-                  className="form-input pl-10"
+                  className="w-full py-3 px-4 pl-10 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -157,14 +158,14 @@ const Register: React.FC = () => {
             
             <button
               type="submit"
-              className="btn-primary w-full"
+              className="w-full bg-cyan-400 text-white py-3 rounded font-semibold hover:bg-cyan-500 transition-colors"
               disabled={isLoading}
             >
               {isLoading ? 'CREATING ACCOUNT...' : 'REGISTER'}
             </button>
             
             <div className="mt-4 text-center">
-              <span className="text-slate-400">Already have an account? </span>
+              <span className="text-gray-400">Already have an account? </span>
               <Link to="/login" className="text-cyan-400 hover:underline">
                 Login
               </Link>

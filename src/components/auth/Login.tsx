@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { User, KeyRound } from 'lucide-react';
+import { User, Lock } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   // If user is already authenticated, redirect to dashboard
-  React.useEffect(() => {
+  useEffect(() => {
     if (isAuthenticated) {
       navigate('/dashboard');
     }
@@ -41,81 +42,112 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="auth-container min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center bg-teal-600 p-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-6">
-          <button className="btn-primary mb-4">SIGN IN</button>
+        {/* SIGN IN button */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-teal-400 text-white font-medium px-16 py-3 rounded text-center">
+            SIGN IN
+          </div>
         </div>
         
-        <div className="auth-card rounded-lg shadow-card p-8 animate-fade-in">
-          <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 rounded-full bg-slate-600 flex items-center justify-center">
-              <User className="text-slate-400" size={48} />
-            </div>
+        {/* Login card */}
+        <div className="relative rounded-lg overflow-hidden shadow-xl">
+          {/* Background with waves */}
+          <div className="absolute inset-0 bg-blue-950 z-0">
+            <div className="absolute w-full h-16 bg-blue-900/30 rounded-full -skew-y-3 top-1/4 transform"></div>
+            <div className="absolute w-full h-16 bg-blue-900/30 rounded-full -skew-y-3 top-1/3 transform"></div>
           </div>
           
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-              {error}
+          {/* Content */}
+          <div className="relative z-10 p-8">
+            {/* User avatar */}
+            <div className="flex justify-center mb-8">
+              <div className="w-24 h-24 rounded-full bg-gray-600/40 flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-gray-500/70 flex items-center justify-center">
+                  <User className="text-gray-400" size={48} />
+                </div>
+              </div>
             </div>
-          )}
-          
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+            
+            {/* Error message */}
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {error}
+              </div>
+            )}
+            
+            {/* Login form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Username field */}
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User size={20} className="text-slate-400" />
+                  <User size={20} className="text-gray-400" />
                 </div>
                 <input
-                  type="email"
-                  placeholder="Email"
-                  className="form-input pl-10"
+                  type="text"
+                  placeholder="username"
+                  className="w-full bg-blue-800/60 text-gray-300 rounded py-3 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-teal-400"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-            </div>
-            
-            <div className="mb-6">
+              
+              {/* Password field */}
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <KeyRound size={20} className="text-slate-400" />
+                  <Lock size={20} className="text-gray-400" />
                 </div>
                 <input
                   type="password"
-                  placeholder="Password"
-                  className="form-input pl-10"
+                  placeholder="password"
+                  className="w-full bg-blue-800/60 text-gray-300 rounded py-3 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-teal-400"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-            </div>
-            
-            <div className="flex items-center justify-between mb-6">
-              <label className="flex items-center text-cyan-400 text-sm">
-                <input type="checkbox" className="mr-2" />
-                Remember me
-              </label>
-              <a href="#" className="text-cyan-400 text-sm hover:underline">
-                Forgot your password?
-              </a>
-            </div>
-            
-            <button
-              type="submit"
-              className="btn-primary w-full"
-              disabled={isLoading}
-            >
-              {isLoading ? 'LOGGING IN...' : 'LOGIN'}
-            </button>
-            
-            <div className="mt-4 text-center">
-              <span className="text-slate-400">Don't have an account? </span>
-              <Link to="/register" className="text-cyan-400 hover:underline">
-                Register
-              </Link>
-            </div>
-          </form>
+              
+              {/* Remember me and Forgot password */}
+              <div className="flex items-center justify-between pt-1 pb-4">
+                <label className="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="sr-only"
+                  />
+                  <span className="relative w-4 h-4 block bg-transparent border border-teal-400 rounded mr-2">
+                    {rememberMe && (
+                      <span className="absolute inset-0 flex items-center justify-center text-teal-400 text-xs">
+                        ✓
+                      </span>
+                    )}
+                  </span>
+                  <span className="text-teal-400 text-sm">Remember me</span>
+                </label>
+                <Link to="/forgot-password" className="text-teal-400 text-sm hover:underline">
+                  Forgot your password?
+                </Link>
+              </div>
+              
+              {/* Login button */}
+              <button
+                type="submit"
+                className="w-full bg-teal-400 hover:bg-teal-500 text-white font-medium py-3 px-4 rounded transition-colors duration-200"
+                disabled={isLoading}
+              >
+                {isLoading ? 'LOGGING IN...' : 'LOGIN'}
+              </button>
+              
+              {/* Register link */}
+              <div className="text-center pt-2">
+                <span className="text-gray-400">Don't have an account? </span>
+                <Link to="/register" className="text-teal-400 hover:underline">
+                  Register
+                </Link>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
