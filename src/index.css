@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0e94a0;
+  --secondary: #1e293b;
+  --accent: #06d6d6;
+  --background: #f8fafc;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-slate-50;
+}
+
+.auth-container {
+  background-color: var(--primary);
+  background-image: linear-gradient(135deg, var(--primary) 0%, #12587d 100%);
+}
+
+.auth-card {
+  background-color: var(--secondary);
+  background-image: linear-gradient(0deg, #1e293b 0%, #273549 100%);
+}
+
+.btn-primary {
+  @apply bg-cyan-400 hover:bg-cyan-500 text-slate-900 font-semibold py-3 px-6 rounded transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-slate-600 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded transition-colors;
+}
+
+.form-input {
+  @apply bg-slate-700/50 border border-slate-600 rounded py-3 px-4 text-white w-full focus:outline-none focus:ring-2 focus:ring-cyan-400/50;
+}
+
+.status-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.status-active {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-inactive {
+  @apply bg-amber-100 text-amber-800;
+}
+
+.status-suspended {
+  @apply bg-red-100 text-red-800;
+}
+
+.action-btn {
+  @apply text-gray-400 hover:text-gray-600;
+}
